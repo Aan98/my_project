@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1f6feb">
+  <title>Gym Tracker</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <nav class="tabs">
+    <button type="button" class="tab" data-screen="workout">Workout</button>
+    <button type="button" class="tab" data-screen="history">History</button>
+  </nav>
+
+  <p id="app-error" class="app-error" hidden></p>
+
+  <main>
+    <section id="workout-screen" class="screen"></section>
+    <section id="history-screen" class="screen" hidden></section>
+  </main>
+</body>
+</html>
