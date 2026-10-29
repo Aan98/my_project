@@ -24,13 +24,7 @@ export function renderWorkout(root, view, actions) {
     el('p', { className: 'started' }, view.startedText),
     ...view.exercises.map((exercise) => exerciseCard(exercise, actions)),
     addExerciseForm(actions),
-    bottomBar(el('button', {
-      type: 'button',
-      className: 'danger',
-      onclick: () => {
-        if (confirm('Finish this workout?')) actions.finish();
-      },
-    }, 'Finish workout')),
+    bottomBar(finishButton(actions)),
   );
 
   if (view.focusExerciseId) {
@@ -91,6 +85,33 @@ function addExerciseForm(actions) {
     name,
     el('button', { type: 'submit', className: 'secondary' }, 'Add exercise')),
     error);
+}
+
+// Two taps to finish, so a mis-tap cannot end the workout. Uses no
+// browser dialog (confirm() is blocked in some browsers and webviews).
+const CONFIRM_MS = 4000;
+
+function finishButton(actions) {
+  let timeoutId = null;
+  const button = el('button', {
+    type: 'button',
+    className: 'danger',
+    onclick: () => {
+      if (timeoutId !== null) {
+        clearTimeout(timeoutId);
+        actions.finish();
+        return;
+      }
+      button.textContent = 'Tap again to finish';
+      button.classList.add('armed');
+      timeoutId = setTimeout(() => {
+        timeoutId = null;
+        button.textContent = 'Finish workout';
+        button.classList.remove('armed');
+      }, CONFIRM_MS);
+    },
+  }, 'Finish workout');
+  return button;
 }
 
 function bottomBar(button) {
