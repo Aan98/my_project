@@ -1,0 +1,27 @@
+# Dependencies (none expected, but never commit them)
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files
+.env
+.env.*
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Claude Code local settings
+.claude/settings.local.json
+CLAUDE.local.md
+
+# Exported backups, if saved into the project folder by accident
+gym-tracker-*.json
