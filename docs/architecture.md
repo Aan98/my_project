@@ -25,6 +25,7 @@ structure described here, update this file in the same change.
 ├── index.html            single page, holds all screens
 ├── manifest.webmanifest  app name, icons, colors (installable app)
 ├── sw.js                 service worker: caches app files for offline use
+├── .nojekyll             tells GitHub Pages to serve files as-is (no Jekyll)
 ├── css/
 │   └── styles.css        mobile-first styles
 ├── js/
@@ -89,6 +90,10 @@ Files are created when the first feature that needs them is built.
   the phone, it must be hosted on any static HTTPS host (e.g. GitHub Pages).
   That only serves the app files; the user's data still never leaves the
   phone.
+- GitHub Pages serves the app from a subfolder
+  (`https://<user>.github.io/<repo>/`), so every path in HTML, CSS and JS
+  must be relative (`css/styles.css`, `./model.js`), never `/css/...`.
+  `tests/paths.test.js` enforces this.
 
 ## Run locally
 
